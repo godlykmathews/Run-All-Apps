@@ -1,0 +1,102 @@
+{
+  "name": "run-all-apps",
+  "displayName": "Run All Apps",
+  "description": "One-click buttons in the status bar to launch dev commands",
+  "version": "0.0.1",
+  "publisher": "godly",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Run All Apps",
+      "properties": {
+        "runAllApps.buttons": {
+          "type": "array",
+          "default": [],
+          "description": "List of buttons to display in the status bar",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique id for the button"
+              },
+              "text": {
+                "type": "string",
+                "description": "Text to display, can include icons"
+              },
+              "tooltip": {
+                "type": "string"
+              },
+              "command": {
+                "type": "string",
+                "description": "Shell command to run"
+              },
+              "alignment": {
+                "enum": ["left", "right"],
+                "default": "right"
+              },
+              "priority": {
+                "type": "number",
+                "default": 0
+              },
+              "color": {
+                "type": "string"
+              },
+              "backgroundColor": {
+                "type": "string"
+              },
+              "reuseTerminal": {
+                "type": "boolean",
+                "default": true
+              },
+              "workingDirectory": {
+                "type": "string",
+                "description": "Working directory for the command, relative to workspace"
+              }
+            },
+            "required": ["id", "text", "command"]
+          }
+        },
+        "runAllApps.loadNpmScripts": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically load npm scripts from package.json as buttons"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.103.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2",
+    "ts-loader": "^9.5.2",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
