@@ -2,7 +2,7 @@
   "name": "run-all-apps",
   "displayName": "Run All Apps",
   "description": "One-click buttons in the status bar to launch dev commands",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "godly",
   "engines": {
     "vscode": "^1.103.0"
@@ -13,6 +13,7 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "icon": "logo.png",
   "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
@@ -20,7 +21,16 @@
       "properties": {
         "runAllApps.buttons": {
           "type": "array",
-          "default": [],
+          "default": [
+            {
+              "id": "run-dev",
+              "text": "Run Dev",
+              "tooltip": "Run npm run dev",
+              "command": "npm run dev",
+              "alignment": "right",
+              "priority": 0
+            }
+          ],
           "description": "List of buttons to display in the status bar",
           "items": {
             "type": "object",
